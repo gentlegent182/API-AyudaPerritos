@@ -74,24 +74,26 @@
         <h1 class="display-3 text-primary py-3">Ingresa:</h1>
         <form id="formulario">
             <div class="mb-3">
-                <label for="email" class="form-label">Email:</label>
+                <label for="email" class="form-label text-primary">Email:</label>
                 <input 
                 type="text" 
                 class="form-control" 
                 id="email" placeholder="Ingresa acá tu correo"
                 aria-describedby="emaiHelp"
+                required
                
                 >
                 
-                <div id="emailHelp" class="form-text">No compartiremos tu email con nadie.</div>
+                <div id="emailHelp" class="form-text text-primary">No compartiremos tu email con nadie.</div>
             </div>
             <div class="mb-4">
-                <label for="contraseña" class="form-label">Contraseña:</label>
+                <label for="contraseña" class="form-label text-primary">Contraseña:</label>
                 <input 
                 type="password"
                 class="form-control"
                 placeholder="Ingresa tu contraseña"
                 id="contraseña"
+                required
                 
                 >
             </div>
