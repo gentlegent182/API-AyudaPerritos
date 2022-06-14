@@ -136,6 +136,7 @@ def deleteVenta(id):
     venta.delete(Venta)
     return jsonify(Venta.serialize()),200
 
+<<<<<<< HEAD
 # modificar Venta
 @app.route('/venta/<id>', methods=['PUT'])
 def updateVenta(id):
@@ -167,6 +168,8 @@ def updateVenta(id):
 
     return jsonify(venta.serialize()),200
 
+=======
+>>>>>>> 455e386d9885b6e1d687562ded27c11f19dfda40
 # agregar venta
 # Session = scoped_session(sessionmaker(bind=engine))
 @app.route('/Ventas', methods=['POST'])
