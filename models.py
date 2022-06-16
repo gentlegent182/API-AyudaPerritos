@@ -50,14 +50,14 @@ class Venta(db.Model):
     __tablename__ = 'Venta'
     id_venta = db.Column(db.Integer, primary_key=True)
     fecha = db.Column(db.DateTime)
-    descuento = db.Column(db.Numeric(3), nullable=True)
-    subtotal = db.Column(db.Numeric(3), nullable=False)
-    iva = db.Column(db.Numeric(3), nullable=False)
-    total = db.Column(db.Numeric(3), nullable=False)
+    descuento = db.Column(db.Numeric(999999), nullable=True)
+    subtotal = db.Column(db.Numeric(999999), nullable=False)
+    iva = db.Column(db.Numeric(999999), nullable=False)
+    total = db.Column(db.Numeric(999999), nullable=False)
     estado = db.Column(db.String(1), nullable=False)
     cliente_id = db.Column(db.Numeric(3), nullable=False)
     vendedor_id = db.Column(db.Numeric(3), nullable=False)
-    despacho = db.Column(db.Numeric(3), nullable=False)
+    despacho = db.Column(db.Numeric(999), nullable=False)
     
 
     def serialize(self):
@@ -90,7 +90,7 @@ class Descuento(db.Model):
     id_descuento = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(250), nullable=False)
     fecha = db.Column(db.DateTime)
-    porcentaje = db.Column(db.Numeric(3), nullable=False)
+    porcentaje = db.Column(db.Numeric(999), nullable=False)
     estado = db.Column(db.String(1), nullable=False)
     
 
