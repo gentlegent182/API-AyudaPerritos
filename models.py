@@ -5,8 +5,6 @@ db = SQLAlchemy()
 class Cliente(db.Model):
     __tablename__ = 'Cliente'
     id = db.Column(db.Integer, primary_key=True)
-    rut = db.Column(db.Numeric(11), nullable=False)
-    porcentaje = db.Column(db.Numeric(3), nullable=False)
     primer_nombre = db.Column(db.String(250), nullable=False)
     segundo_nombre = db.Column(db.String(250), nullable=True)
     apellido_paterno = db.Column(db.String(250), nullable=False)
@@ -14,22 +12,20 @@ class Cliente(db.Model):
     direccion = db.Column(db.String(250), nullable=False)
     fono = db.Column(db.Numeric(3), nullable=False)
     correo = db.Column(db.String(250), nullable=False)
-    estado = db.Column(db.String(1), nullable=False)
+    estado = db.Column(db.String(1), nullable=True)
     comuna_id = db.Column(db.Numeric(3), nullable=False)
     
 
     def serialize(self):
         return {
             "id": self.id,
-            "rut": self.rut,
-            "porcentaje": self.porcentaje,
             "primer_nombre": self.primer_nombre,
             "segundo_nombre": self.segundo_nombre,
             "apellido_paterno": self.apellido_paterno,
             "apellido_materno": self.apellido_materno,
             "direccion": self.direccion,
             "fono": self.fono,
-            "corro": self.correo,
+            "correo": self.correo,
             "estado": self.estado,
             "comuna_id": self.comuna_id,
 
@@ -50,14 +46,14 @@ class Venta(db.Model):
     __tablename__ = 'Venta'
     id_venta = db.Column(db.Integer, primary_key=True)
     fecha = db.Column(db.DateTime)
-    descuento = db.Column(db.Numeric(999999), nullable=True)
-    subtotal = db.Column(db.Numeric(999999), nullable=False)
-    iva = db.Column(db.Numeric(999999), nullable=False)
-    total = db.Column(db.Numeric(999999), nullable=False)
+    descuento = db.Column(db.Numeric(3), nullable=True)
+    subtotal = db.Column(db.Numeric(3), nullable=False)
+    iva = db.Column(db.Numeric(3), nullable=False)
+    total = db.Column(db.Numeric(3), nullable=False)
     estado = db.Column(db.String(1), nullable=False)
     cliente_id = db.Column(db.Numeric(3), nullable=False)
     vendedor_id = db.Column(db.Numeric(3), nullable=False)
-    despacho = db.Column(db.Numeric(999), nullable=False)
+    despacho = db.Column(db.Numeric(3), nullable=False)
     
 
     def serialize(self):
@@ -90,7 +86,7 @@ class Descuento(db.Model):
     id_descuento = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(250), nullable=False)
     fecha = db.Column(db.DateTime)
-    porcentaje = db.Column(db.Numeric(999), nullable=False)
+    porcentaje = db.Column(db.Numeric(3), nullable=False)
     estado = db.Column(db.String(1), nullable=False)
     
 

@@ -12,10 +12,12 @@
 
     <title>Productos</title>
 </head>
-<!-- Navbar-Productos -->
+
 
 <body>
-    <nav id="navbarejemplo" class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+
+    <!-- Navbar-Productos -->
+    <nav id="navbarejemplo" class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top ">
         <div class="container">
             <a href="/Paginaprincipal.html" class="navbar-brand">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dog-bowl" width="28"
@@ -62,70 +64,112 @@
                         </a>
 
                     </li>
+
+                    <li class="nav-item">
+                        <a href="/usuarios.html" class="nav-link active">
+                            Registro Usuario
+                        </a>
+
+                    </li>
+
+
                 </ul>
             </div>
         </div>
     </nav>
-    <section class="py-5">
-        <div class="text-center mb-5 py-5">
+    <!-- Aca termina navbar -->
+    <h1 class="py-2"></h1>
 
-            <h1 class="text-primary display-4">Los mejores productos para los mejores amigos</h1>
-        </div>
-        <div class="row container-fluid">
-            <div class="col-12 col-md-4 mb-5">
-                <div class="card border-primary" style="width: 18rem;">
-                    <img src="imagenes_prueba/p1.webp" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <p class="card-text">Producto 1 y su buen blablabla blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla</p>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-12 col-md-4 mb-5">
-                <div class="card border-primary" style="width: 18rem;">
-                    <img src="imagenes_prueba/p2.webp" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <p class="card-text">Producto 2 y su buen blablabla blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla</p>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-12 col-md-4 mb-5">
-                <div class="card border-primary" style="width: 18rem;">
-                    <img src="imagenes_prueba/p3.webp" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <p class="card-text">Producto 3 y su buen blablabla blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla</p>
-                    </div>
-                  </div>
-            </div>
-        </div>
 
-        <div class="row container-fluid">
-            <div class="col-12 col-md-4 mb-5">
-                <div class="card border-primary" style="width: 18rem;">
-                    <img src="imagenes_prueba/p4.webp" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <p class="card-text">Producto 4 y su buen blablabla blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla</p>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-12 col-md-4 mb-5">
-                <div class="card border-primary" style="width: 18rem;">
-                    <img src="imagenes_prueba/p5.webp" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <p class="card-text">Producto 5 y su buen blablabla blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla</p>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-12 col-md-4 mb-5">
-                <div class="card border-primary" style="width: 18rem;">
-                    <img src="imagenes_prueba/p6.webp" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <p class="card-text">Producto 6 y su buen blablabla blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla</p>
-                    </div>
-                  </div>
+
+
+    <!-- Titulo y id con el cual se generan las card por js -->
+    <div class="container py-5">
+        <h1 class="mt-5 text-primary">Productos</h1>
+        <hr>
+        <div class="row" id="cards"></div>
+        <!-- Carrito de compra pintado -->
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-primary">ID</th>
+                    <th scope="col" class="text-primary">Item</th>
+                    <th scope="col" class="text-primary">Cantidad</th>
+                    <th scope="col" class="text-primary">Acción</th>
+                    <th scope="col" class="text-primary">Total</th>
+                </tr>
+            </thead>
+            <tbody id="items"></tbody>
+            <tfoot>
+                <tr id="footer">
+                    <th scope="row" colspan="5" class="text-primary">Carrito vacío - comience a comprar!</th>
+                </tr>
+            </tfoot>
+        </table>
+        <!-- Fin carrito de compra -->
+    </div>
+    <!-- Fin titulo -->
+
+
+
+
+
+    <!-- Los template no los lee el HTML por eso pueden estar fuera del container principal  -->
+    <template id="template-card">
+        <div class="col-12 col-md-4 mb-2">
+            <div class="card">
+                <img src="" alt="" class=card-img-top>
+                <div class=card-body>
+                    <h5 class="text-primary">Titulo</h5>
+                    <p class="text-primary">Precio </p>
+                    <button class="btn btn-primary">Comprar</button>
+                </div>
             </div>
         </div>
+    </template>
+    <!-- Aca termina el template Card-productos -->
 
-    </section>
+    <!-- Template-Carro de compras principal -->
+    <template id="template-carrito">
+        <tr>
+            <th scope="row" class="text-primary">id</th>
+            <td class="text-primary">Café</td>
+            <td class="text-primary">1</td>
+            <td>
+                <button class="btn btn-info btn-sm">
+                    +
+                </button>
+                <button class="btn btn-danger btn-sm">
+                    -
+                </button>
+            </td>
+            <td class="text-primary">$ <span class="text-primary">500</span></td>
+        </tr>
+    </template>
+    <!-- Aca termina template-carro de compras principal -->
+
+    <!-- Template-Carro de compra Footer -->
+    <template id="template-footer">
+        <th scope="row" colspan="2" class="text-primary">Total productos</th>
+        <td class="text-primary">10</td>
+        <td>
+            <button class="btn btn-danger btn-sm" id="vaciar-carrito">
+                vaciar todo
+            </button>
+        </td>
+        <td class="font-weight-bold text-primary">$ <span>5000</span></td>
+    </template>
+    <!-- Aca termina Template-Carro de compra Footer  -->
+
+
+
+
+
+
+
+
+
+
 
 
 

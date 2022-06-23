@@ -1,9 +1,17 @@
-# 0. ejecutamos pip install flask flask-sqlalchemy flask-migrate flask-cors
+# 0. ejecutamos pip install flask flask-sqlalchemy flask-migrate flask-cors flask-jwt-extended
 # 1. importamos la libreria flask
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
 from flask_migrate import Migrate
-from models import db, Cliente, Venta, Descuento, Producto, Descuento_Producto, Suscripcion, Detalle, Donacion, Comuna, Region, Vendedor, Despacho
+from sqlalchemy import true
+from models import db, Cliente, Suscripcion, Comuna, Region
+from models import Venta, Descuento, Producto, Descuento_Producto, Donacion, Vendedor, Despacho, Detalle
 from flask_cors import CORS, cross_origin
+
+# 16. jwt seguridad
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
 
 # 2 Aplicacion Creada
 app = Flask(__name__)
@@ -14,15 +22,41 @@ app.config['DEBUG'] = False
 app.config['ENV'] = 'development'
 app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+#app.config['SQLALCHEMY_ECHO'] = True # para ver los cambios en la base de datos 
+
+# 17. configuracion de seguridad
+app.config['JWT_SECRET_KEY'] = "secret-key"
+app.config["JWT_SECRET_KEY"] = "os.environ.get('super-secret')"
+jwt = JWTManager(app)
 
 db.init_app(app)
 
 Migrate(app, db)
 
-# 3. Creamos una ruta para validar nuestra app
+# 18. Ruta de login
+@app.route("/login", methods=["POST"])
+def create_token():
+    email = request.json.get("email")
+    password = request.json.get("password")
+
+    cliente = cliente.query.filter(cliente.email == email, cliente.password == password).first()
+
+    if cliente == None:
+        return jsonify({ 
+            "estado": "error",
+            "msg": "Error en email o password"}), 401
+
+    access_token = create_access_token(identity=email)
+    return jsonify(access_token=access_token, usuario_id=cliente.id),200
+
+
+# 5. Creamos la ruta por defecto para saber si mi app esta funcionado
+# 6. ejecutamos el comando en la consola: python app.py o python3 app.py y revisamos nuestro navegador
 @app.route('/')
+# @jwt_required()
 def index():
-    return 'Hola mundo'
+    return 'Hola desde gitpod'
+
 
 # Creamos nuestras funciones
 
@@ -86,8 +120,6 @@ def updateCliente(id):
 @app.route('/Clientes', methods=['POST'])
 def addCliente():
     cliente = Cliente()
-    rut = request.json.get('rut')
-    porcentaje = request.json.get('porcentaje')
     primer_nombre = request.json.get('primer_nombre')
     segundo_nombre = request.json.get('segundo_nombre')
     apellido_paterno = request.json.get('apellido_paterno')
@@ -98,8 +130,6 @@ def addCliente():
     estado = request.json.get('estado')
     comuna_id = request.json.get('comuna_id')
 
-    cliente.rut = rut
-    cliente.porcentaje = porcentaje
     cliente.primer_nombre = primer_nombre
     cliente.segundo_nombre = segundo_nombre
     cliente.apellido_paterno = apellido_paterno
@@ -135,8 +165,6 @@ def deleteVenta(id):
     venta = Venta.query.get('id')
     venta.delete(Venta)
     return jsonify(Venta.serialize()),200
-
-<<<<<<< HEAD
 # modificar Venta
 @app.route('/venta/<id>', methods=['PUT'])
 def updateVenta(id):
@@ -167,9 +195,7 @@ def updateVenta(id):
     Venta.save(venta)
 
     return jsonify(venta.serialize()),200
-
-=======
->>>>>>> 455e386d9885b6e1d687562ded27c11f19dfda40
+    
 # agregar venta
 # Session = scoped_session(sessionmaker(bind=engine))
 @app.route('/Ventas', methods=['POST'])
@@ -827,4 +853,4 @@ def addDespacho():
 
 # 9. ejecutamos el comando flask run --host=0.0.0.0 en caso que tengamos problemas con el cors
 if __name__ == '__main__':
-    app.run(port=3000, debug=True)
+    app.run(port=5000, debug=True)
