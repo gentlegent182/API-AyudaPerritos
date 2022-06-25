@@ -1,0 +1,38 @@
+[
+    {
+      "precio": 5000,
+      "id": 1,
+      "title": "Comida de perro",
+      "thumbnailUrl": "https://picsum.photos/id/0/600"
+    },
+    {
+      "precio": 3000,
+      "id": 2,
+      "title": "Comida de gato",
+      "thumbnailUrl": "https://picsum.photos/id/10/600"
+    },
+    {
+      "precio": 10000,
+      "id": 3,
+      "title": "Juguete",
+      "thumbnailUrl": "https://picsum.photos/id/20/600"
+    },
+    {
+      "precio":4500,
+      "id": 4,
+      "title": "Plato de perro",
+      "thumbnailUrl": "https://picsum.photos/id/30/600"
+    },
+    {
+      "precio": 5000,
+      "id": 5,
+      "title": "Plato de Gato",
+      "thumbnailUrl": "https://picsum.photos/id/40/600"
+    },
+    {
+      "precio": 3500,
+      "id": 6,
+      "title": "Plato para agua",
+      "thumbnailUrl": "https://picsum.photos/id/50/600"
+    }
+  ]
